@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Average Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        h3 {
+            color: #555;
+            margin-top: 20px;
+        }
+        p {
+            color: #666;
+            margin: 5px 0;
+        }
+        .result {
+            background: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            margin: 20px auto;
+            padding: 20px;
+            text-align: left;
+            max-width: 400px;
+        }
+        .result p {
+            font-size: 1.1em;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #0077cc;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        
+        let numOfCourses = parseInt(prompt("How many courses did you finish?", "0"));
+
+        if (isNaN(numOfCourses) || numOfCourses <= 0) {
+            document.write("<p>Invalid Input!</p>");
+        } else {
+            let courseMarks = [];
+            let total = 0;
+
+            for (let i = 1; i <= numOfCourses; i++) {
+                let mark = parseFloat(prompt(`Enter your mark for course ${i}`));
+                while (isNaN(mark) || mark < 0 || mark > 100) {
+                    mark = parseFloat(prompt(`Invalid mark! Enter a valid mark for course ${i} (0-100):`));
+                }
+                courseMarks.push(mark);
+                total += mark;
+            }
+
+            let average = total / numOfCourses;
+            let roundedAverage = Math.round(average * 100) / 100;
+
+            let grade;
+            if (roundedAverage >= 90) {
+                grade = "A+";
+            } else if (roundedAverage >= 80) {
+                grade = "B";
+            } else if (roundedAverage >= 70) {
+                grade = "C";
+            } else if (roundedAverage >= 60) {
+                grade = "D";
+            } else {
+                grade = "F";
+            }
+
+            document.write("<h3>Course Marks:</h3>");
+            courseMarks.forEach((mark, index) => {
+                document.write(`<p>Course ${index + 1}: ${mark}</p>`);
+            });
+            document.write(`<h3>Your Final Average is ${roundedAverage}. Your Grade is ${grade}.</h3>`);
+        }
+    </script>
+</body>
+</html>
